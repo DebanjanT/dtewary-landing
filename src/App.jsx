@@ -4,6 +4,7 @@ import Tabs from "./components/Tabs";
 import { BsChatFill, BsFillCloudFill } from "react-icons/bs";
 import { RiTeamFill } from "react-icons/ri";
 import { MdHomeFilled } from "react-icons/md";
+import { HiInformationCircle } from "react-icons/hi2";
 
 const App = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -21,7 +22,7 @@ const App = () => {
       icon: BsChatFill,
     },
     {
-      label: "Open Source",
+      label: "Ch",
       icon: BsFillCloudFill,
       dropdownItems: [
         {
@@ -40,7 +41,7 @@ const App = () => {
   ];
 
   return (
-    <div className="w-full max-w-[1366px] mx-auto bg-white">
+    <div id="home" className="w-full max-w-[1366px] mx-auto bg-white pb-6">
       <div className="py-2 px-3 border-b border-gray-200">
         {/* Logo */}
         <div className="flex items-center justify-start gap-1">
@@ -64,9 +65,24 @@ const App = () => {
       </div>
       {/* Hero Section */}
       <HeroSection />
-      <main className="px-3">
-        <p>Hi</p>
-      </main>
+      <div className="px-3">
+        <div className="border border-brand-blue bg-brand-blueLight p-4 mt-6 shadow-mild">
+          <div className="flex">
+            <div className="shrink-0">
+              <HiInformationCircle
+                aria-hidden="true"
+                className="size-5 text-brand-blue"
+              />
+            </div>
+            <div className="ml-3 flex-1 md:flex md:justify-between">
+              <p className="text-sm text-brand-blueDark">
+                This website is currently under construction. Please visit again
+                soon.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

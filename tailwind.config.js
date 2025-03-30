@@ -35,6 +35,9 @@ export default {
           blackLight:"#454545",
           blackLighter:"#767676",
           background:"#d5d5d5",
+          blue:"#2c6fbb",
+          blueLight:"#c7dbf2",
+          blueDark:"#1f4e84"
         }
       }
     },
