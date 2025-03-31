@@ -38,6 +38,9 @@ const Navigation = ({ page }) => {
       {
         label: "About Us",
         Prefix: manIcon,
+        onClick: () => {
+          navigate("/about");
+        },
       },
       {
         label: "Contact",

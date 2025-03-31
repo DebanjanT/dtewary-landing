@@ -11,7 +11,7 @@ const Contact = () => {
       <div className="px-3">
         <div className="relative isolate bg-white">
           <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
-            <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
+            <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:pb-48">
               <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">
                 <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2">
                   <svg
@@ -52,7 +52,7 @@ const Contact = () => {
                     />
                   </svg>
                 </div>
-                <h2 className=" text-pretty text-5xl font-bold tracking-tight text-transparent text-gradient bg-clip-text sm:text-5xl drop-shadow">
+                <h2 className=" text-pretty text-5xl font-bold tracking-tight text-transparent text-gradient bg-clip-text drop-shadow">
                   Get in touch
                 </h2>
                 <p className="mt-6 text-lg/8 text-gray-600 os-light">
