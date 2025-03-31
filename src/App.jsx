@@ -1,44 +1,54 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import HeroSection from "./Hero";
 import Tabs from "./components/Tabs";
-import { BsChatFill, BsFillCloudFill } from "react-icons/bs";
-import { RiTeamFill } from "react-icons/ri";
-import { MdHomeFilled } from "react-icons/md";
-import { HiInformationCircle } from "react-icons/hi2";
+import {
+  RiGalleryFill,
+  RiHome3Fill,
+  RiInformation2Fill,
+  RiMessage2Fill,
+  RiTeamFill,
+} from "react-icons/ri";
 
 const App = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const tabsData = [
-    {
-      label: "Home",
-      icon: MdHomeFilled, // Pass the component reference, not <FiHome />
+  const tabsData = useMemo(
+    () => [
+      {
+        label: "Home",
+        icon: RiHome3Fill, // Pass the component reference, not <FiHome />
+      },
+      {
+        label: "About Us",
+        icon: RiTeamFill,
+      },
+      {
+        label: "Contact",
+        icon: RiMessage2Fill,
+      },
+      {
+        label: "Gallery",
+        icon: RiGalleryFill,
+      },
+    ],
+    []
+  );
+
+  // Memoize the onChange handler
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  const handleTabChange = useMemo(
+    () => (index) => {
+      const tab = tabsData[index];
+      if (tab.onClick) {
+        tab.onClick();
+      }
     },
-    {
-      label: "About Us",
-      icon: RiTeamFill,
-    },
-    {
-      label: "Contact",
-      icon: BsChatFill,
-    },
-    {
-      label: "Ch",
-      icon: BsFillCloudFill,
-      dropdownItems: [
-        {
-          label: (
-            <p className="w-full">
-              Transit Pass Manager
-              <span className="text-[12px] bg-brand-yellow px-1 rounded-full ml-1">
-                Upcoming
-              </span>
-            </p>
-          ),
-          onClick: () => console.log("Maintenance clicked"),
-        },
-      ],
-    },
-  ];
+
+    []
+  );
+
+  useEffect(() => {
+    console.log("Re-rendered");
+  }, []);
 
   return (
     <div id="home" className="w-full max-w-[1366px] mx-auto bg-white pb-6">
@@ -60,7 +70,7 @@ const App = () => {
         <Tabs
           tabs={tabsData}
           activeTab={activeTab}
-          onChange={(index) => setActiveTab(index)}
+          onChange={handleTabChange}
         />
       </div>
       {/* Hero Section */}
@@ -69,7 +79,7 @@ const App = () => {
         <div className="border border-brand-blue bg-brand-blueLight p-4 mt-6 shadow-mild">
           <div className="flex">
             <div className="shrink-0">
-              <HiInformationCircle
+              <RiInformation2Fill
                 aria-hidden="true"
                 className="size-5 text-brand-blue"
               />

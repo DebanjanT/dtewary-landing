@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Blurhash } from "react-blurhash";
+import { RiFilePaper2Fill } from "react-icons/ri";
 
 const HeroSection = ({
   slides = [],
@@ -15,8 +16,8 @@ const HeroSection = ({
       id: 1,
       image: "https://dtd-stylex.vercel.app/assets/dt-depo-CWLz1tEB.jpg",
       blurhash: "LWJ7~@RP4nNH2zRiiuWC^,act6s:",
-      title: "Innovative Solutions",
-      subtitle: "Tailored to meet your specific needs",
+      title: "Premium Timber Solutions",
+      subtitle: "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
     },
   ];
 
@@ -106,15 +107,17 @@ const HeroSection = ({
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
-        <h1 className="text-5xl font-bold text-white mb-4 max-w-3xl">
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 max-w-3xl">
           {title}
         </h1>
-        <p className="text-xl text-white mb-8 max-w-2xl">{subtitle}</p>
+        <p className="text-sm sm:text-md md:text-lg text-white mb-8 max-w-2xl">
+          {subtitle}
+        </p>
         <button
           type="button"
-          className="px-6 py-3 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black shadow-medium hover:scale-[105%] transition-all ease-in-out duration-200 "
+          className="flex justify-center items-center gap-2 px-6 py-3 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black shadow-medium hover:scale-[105%] transition-all ease-in-out duration-200 "
         >
-          Get A Quote
+          <RiFilePaper2Fill /> Get A Quote
         </button>
       </div>
 
