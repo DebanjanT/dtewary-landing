@@ -1,11 +1,9 @@
 import Layout from "../../components/shared/Layout";
 import Input from "../../components/Input";
-import {
-  RiMailAddFill,
-  RiMailSendFill,
-  RiMap2Fill,
-  RiPhoneFill,
-} from "react-icons/ri";
+import phoneIcon from "../../assets/phone.png";
+import emailIcon from "../../assets/email.png";
+import googleMapsIcon from "../../assets/google-maps.png";
+import sendIcon from "../../assets/send.png";
 
 const Contact = () => {
   return (
@@ -68,10 +66,7 @@ const Contact = () => {
                   <div className="flex gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Telephone</span>
-                      <RiPhoneFill
-                        aria-hidden="true"
-                        className="h-7 w-6 text-gray-400"
-                      />
+                      <img src={phoneIcon} alt="Telephone" />
                     </dt>
                     <dd>
                       <a
@@ -85,10 +80,7 @@ const Contact = () => {
                   <div className="flex gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Email</span>
-                      <RiMailAddFill
-                        aria-hidden="true"
-                        className="h-7 w-6 text-gray-400"
-                      />
+                      <img src={emailIcon} alt="Email" />
                     </dt>
                     <dd>
                       <a
@@ -102,10 +94,7 @@ const Contact = () => {
                   <div className="flex gap-x-4">
                     <dt className="flex-none">
                       <span className="sr-only">Location</span>
-                      <RiMap2Fill
-                        aria-hidden="true"
-                        className="h-7 w-6 text-gray-400"
-                      />
+                      <img src={googleMapsIcon} alt="Location" />
                     </dt>
                     <dd>
                       <a
@@ -211,7 +200,7 @@ const Contact = () => {
                     type="button"
                     className="btn-brand-yellow px-3 py-2 shadow-sm w-full md:w-auto"
                   >
-                    <RiMailSendFill /> Send message
+                    <img src={sendIcon} alt="Send" /> Send message
                   </button>
                 </div>
               </div>

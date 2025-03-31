@@ -1,15 +1,12 @@
-import React, { useMemo, useState } from "react";
-import { RiSearchLine } from "react-icons/ri";
+import React, { useMemo } from "react";
 import Input from "../../components/Input";
 import Tabs from "../../components/Tabs";
-import {
-  RiGalleryFill,
-  RiHome3Fill,
-  RiMessage2Fill,
-  RiTeamFill,
-} from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
+import manIcon from "../../assets/man.png";
+import houseIcon from "../../assets/house.png";
+import galleryIcon from "../../assets/gallery.png";
+import chatBoxIcon from "../../assets/chat-box.png";
+import LoupeIcon from "../../assets/loupe.png";
 const Navigation = ({ page }) => {
   const activeTab = useMemo(() => {
     switch (page) {
@@ -33,25 +30,25 @@ const Navigation = ({ page }) => {
     () => [
       {
         label: "Home",
-        icon: RiHome3Fill, // Pass the component reference, not <FiHome />
+        Prefix: houseIcon, // Pass the component reference, not <FiHome />
         onClick: () => {
           navigate("/");
         },
       },
       {
         label: "About Us",
-        icon: RiTeamFill,
+        Prefix: manIcon,
       },
       {
         label: "Contact",
-        icon: RiMessage2Fill,
+        Prefix: chatBoxIcon,
         onClick: () => {
           navigate("/contact");
         },
       },
       {
         label: "Gallery",
-        icon: RiGalleryFill,
+        Prefix: galleryIcon,
       },
     ],
     []
@@ -72,7 +69,7 @@ const Navigation = ({ page }) => {
   return (
     <>
       {/* Navigation */}
-      <div className="py-2 px-3 border-b border-gray-200 flex justify-between items-center gap-2">
+      <div className=" py-2 px-3 border-b border-gray-200 flex justify-between items-center gap-2">
         {/* Logo */}
         <div className="flex items-center justify-start gap-1">
           <img
@@ -88,7 +85,7 @@ const Navigation = ({ page }) => {
           <Input
             placeholder="Search"
             containerClassName="w-[220px]"
-            icon={RiSearchLine}
+            prefixSvg={LoupeIcon}
           />
         </div>
       </div>

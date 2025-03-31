@@ -1,14 +1,8 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  useMemo,
-  useRef,
-} from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Blurhash } from "react-blurhash";
-import { RiFilePaper2Fill } from "react-icons/ri";
 import SwanWoodImg from "../../assets/swan-wood-cdgr.jpg";
-
+import citationIcon from "../../assets/citation.png";
+import dtewaryKgp2024 from "../../assets/bigimg/dtewary-kgp-2024.jpg";
 const HeroSection = ({
   slides = [],
   autoSlideDelay = 5000, // Default 5 seconds between slides
@@ -39,6 +33,15 @@ const HeroSection = ({
         // Use a different URL format that might be more reliable
         image: SwanWoodImg,
         blurhash: "LDHnjHb_9[WC?vxa56V[*0WB9FIo",
+        title: "Premium Timber Solutions",
+        subtitle:
+          "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
+      },
+      {
+        id: 3,
+        // Use a different URL format that might be more reliable
+        image: dtewaryKgp2024,
+        blurhash: "LCGIWE9Z9~NgAF~q={M{=}DjyDt1",
         title: "Premium Timber Solutions",
         subtitle:
           "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
@@ -306,7 +309,7 @@ const HeroSection = ({
             type="button"
             className="os-regular flex justify-center items-center gap-2 px-6 py-3 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black shadow-medium hover:scale-[105%] transition-all ease-in-out duration-200"
           >
-            <RiFilePaper2Fill /> Get A Quote
+            <img src={citationIcon} alt="Get A Quote" /> Get A Quote
           </button>
         </div>
       </div>
@@ -365,7 +368,7 @@ const HeroSection = ({
                 type="button"
                 className="os-regular flex justify-center items-center gap-2 px-6 py-3 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black shadow-medium hover:scale-[105%] transition-all ease-in-out duration-200"
               >
-                <RiFilePaper2Fill /> Get A Quote
+                <img src={citationIcon} alt="Get A Quote" /> Get A Quote
               </button>
             </div>
           </div>

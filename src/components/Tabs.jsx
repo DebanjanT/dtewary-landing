@@ -6,7 +6,7 @@ const TabItem = memo(
     label,
     isActive,
     hasDropdown = false,
-    icon: Icon,
+    Prefix,
     dropdownItems = [],
     onClick,
   }) => {
@@ -60,7 +60,13 @@ const TabItem = memo(
                   : "cursor-pointer"
               }`}
           >
-            {Icon && <Icon className="w-5 h-5" />}
+            {Prefix &&
+              (typeof Prefix === "string" ? (
+                <img src={Prefix} alt={label} />
+              ) : (
+                // create icon component
+                <Prefix className="w-5 h-5" />
+              ))}
             {label}
           </p>
           {hasDropdown && (
@@ -99,7 +105,13 @@ const TabItem = memo(
                   setIsDropdownOpen(false);
                 }}
               >
-                {item.icon && <item.icon className="w-5 h-5" />}
+                {item.Prefix &&
+                  (typeof item.Prefix === "string" ? (
+                    <img src={item.Prefix} alt={label} />
+                  ) : (
+                    // create icon component
+                    <item.Prefix className="w-5 h-5" />
+                  ))}
                 {item.label}
               </div>
             ))}
@@ -142,7 +154,7 @@ const Tabs = memo(({ tabs = [], activeTab, onChange }) => {
           // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
           key={index}
           label={tab.label}
-          icon={tab.icon}
+          Prefix={tab.Prefix}
           isActive={currentTab === index}
           hasDropdown={!!tab.dropdownItems && tab.dropdownItems.length > 0}
           dropdownItems={tab.dropdownItems}
