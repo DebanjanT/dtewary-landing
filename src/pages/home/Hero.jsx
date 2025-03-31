@@ -40,6 +40,14 @@ const HeroSection = ({
     [slides]
   );
 
+  // Add a function to detect mobile devices
+  const isMobileDevice = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth < 768;
+  }, []);
+
   // Animation handling function
   const changeSlideWithAnimation = useCallback(
     (newIndex, direction = "next") => {
@@ -97,78 +105,82 @@ const HeroSection = ({
     };
   }, [autoSlide, autoSlideDelay, nextSlide, slideData.length, isFlipping]);
 
-  // Preload all images on initial render
+  // Preload all images on initial render with mobile optimization
   useEffect(() => {
     const imageRefs = new Map();
     let isMounted = true;
+    
+    // Create a cache object to store loaded images
+    const imageCache = {};
+
+    const preloadImage = (src, id, priority = 'low') => {
+      // Skip if already in cache
+      if (imageCache[src]) {
+        if (isMounted) {
+          setLoadedImages(prev => ({ ...prev, [id]: true }));
+        }
+        return Promise.resolve();
+      }
+
+      return new Promise((resolve) => {
+        const img = new Image();
+        imageRefs.set(id, img);
+        
+        // Set loading priority (fetchpriority is a newer attribute)
+        if ('fetchPriority' in HTMLImageElement.prototype) {
+          img.fetchPriority = priority;
+        }
+        
+        img.onload = () => {
+          if (isMounted) {
+            imageCache[src] = true;
+            setLoadedImages(prev => ({ ...prev, [id]: true }));
+          }
+          resolve();
+        };
+        
+        img.onerror = () => {
+          if (isMounted) {
+            setLoadedImages(prev => ({ ...prev, [id]: true }));
+          }
+          resolve();
+        };
+        
+        // Set decode attribute for better performance
+        img.decoding = 'async';
+        img.src = src;
+      });
+    };
 
     const preloadAllImages = async () => {
-      const imagePromises = slideData.map((slide) => {
-        return new Promise((resolve) => {
-          // Check if image is already loaded
-          if (loadedImages[slide.id]) {
-            resolve();
-            return;
-          }
-
-          const img = new Image();
-          imageRefs.set(slide.id, img);
-          img.src = slide.image;
-          
-          img.onload = () => {
-            if (isMounted) {
-              setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
-            }
-            resolve();
-          };
-          
-          img.onerror = () => {
-            // Still mark as loaded to avoid blocking on error
-            if (isMounted) {
-              setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
-            }
-            resolve();
-          };
-        });
-      });
-
-      // Load next slide with higher priority
-      const nextIndex =
-        currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
-      
-      // Only preload next slide if it's not already loaded
-      if (!loadedImages[slideData[nextIndex].id]) {
-        const nextSlidePromise = new Promise((resolve) => {
-          const img = new Image();
-          imageRefs.set(`next_${slideData[nextIndex].id}`, img);
-          img.src = slideData[nextIndex].image;
-          
-          img.onload = () => {
-            if (isMounted) {
-              setLoadedImages((prev) => ({
-                ...prev,
-                [slideData[nextIndex].id]: true,
-              }));
-            }
-            resolve();
-          };
-          
-          img.onerror = () => {
-            if (isMounted) {
-              setLoadedImages((prev) => ({
-                ...prev,
-                [slideData[nextIndex].id]: true,
-              }));
-            }
-            resolve();
-          };
-        });
-
-        // Wait for next slide to load first, then load the others
-        await nextSlidePromise;
+      // On mobile, only preload current and next slide
+      if (isMobileDevice) {
+        // Current slide
+        await preloadImage(slideData[currentSlide].image, slideData[currentSlide].id, 'high');
+        
+        // Next slide
+        const nextIndex = currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
+        await preloadImage(slideData[nextIndex].image, slideData[nextIndex].id, 'high');
+      } 
+      // On desktop, preload all slides
+      else {
+        // First load current and next slide with high priority
+        await preloadImage(slideData[currentSlide].image, slideData[currentSlide].id, 'high');
+        
+        const nextIndex = currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
+        await preloadImage(slideData[nextIndex].image, slideData[nextIndex].id, 'high');
+        
+        // Then load the rest in the background
+        const otherSlides = slideData.filter((_, index) => 
+          index !== currentSlide && index !== nextIndex
+        );
+        
+        await Promise.all(
+          otherSlides.map(slide => 
+            preloadImage(slide.image, slide.id, 'low')
+          )
+        );
       }
-      
-      await Promise.all(imagePromises);
     };
 
     preloadAllImages();
@@ -184,7 +196,7 @@ const HeroSection = ({
       }
       imageRefs.clear();
     };
-  }, [slideData, currentSlide, loadedImages]);
+  }, [slideData, currentSlide, isMobileDevice]);
 
   const currentSlideData = slideData[currentSlide];
   const isCurrentLoaded = loadedImages[currentSlideData.id];
