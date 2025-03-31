@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef,
+} from "react";
 import { Blurhash } from "react-blurhash";
 import { RiFilePaper2Fill } from "react-icons/ri";
 
@@ -16,36 +22,55 @@ const HeroSection = ({
   );
 
   // Default slides if none provided
-  const defaultSlides = [
-    {
-      id: 1,
-      image: "https://dtd-stylex.vercel.app/assets/dt-depo-CWLz1tEB.jpg",
-      blurhash: "LWJ7~@RP4nNH2zRiiuWC^,act6s:",
-      title: "Premium Timber Solutions",
-      subtitle: "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
-    },
-    {
-      id: 2,
-      image:
-        "https://dtt-landing.vercel.app/assets/wb11d0710_truck-DwpenTU0.jpg",
-      blurhash: "LsDmp*oynio#PqbbWCkD-Yn,kVbI",
-      title: "Premium Timber Solutions",
-      subtitle: "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
-    },
-  ];
+  const defaultSlides = useMemo(
+    () => [
+      {
+        id: 1,
+        image: "https://dtd-stylex.vercel.app/assets/dt-depo-CWLz1tEB.jpg",
+        blurhash: "LWJ7~@RP4nNH2zRiiuWC^,act6s:",
+        title: "Premium Timber Solutions",
+        subtitle:
+          "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
+      },
+      {
+        id: 2,
+        // Use a different URL format that might be more reliable
+        image:
+          "https://static.toiimg.com/thumb/msid-92378232,width-1280,height-720,imgsize-99230,resizemode-72,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
+        blurhash: "LsDmp*oynio#PqbbWCkD-Yn,kVbI",
+        title: "Premium Timber Solutions",
+        subtitle:
+          "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
+      },
+    ],
+    []
+  );
 
   // Use memo to prevent recreation of slideData on every render
   const slideData = useMemo(
     () => (slides.length > 0 ? slides : defaultSlides),
-    [slides]
+    [slides, defaultSlides]
   );
+
+  // Validate image URLs and handle potential network issues
+  const validateImageUrls = useMemo(() => {
+    return slideData.map((slide) => ({
+      ...slide,
+      // Use a local fallback image if the URL is invalid or has issues
+      image:
+        slide.image ||
+        "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9IiNlMmUyZTIiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSI+SW1hZ2UgTm90IEF2YWlsYWJsZTwvdGV4dD48L3N2Zz4=",
+    }));
+  }, [slideData]);
 
   // Add a function to detect mobile devices
   const isMobileDevice = useMemo(() => {
-    if (typeof window === 'undefined') return false;
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    ) || window.innerWidth < 768;
+    if (typeof window === "undefined") return false;
+    return (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ) || window.innerWidth < 768
+    );
   }, []);
 
   // Animation handling function
@@ -109,77 +134,66 @@ const HeroSection = ({
   useEffect(() => {
     const imageRefs = new Map();
     let isMounted = true;
-    
-    // Create a cache object to store loaded images
+
+    // Create a simple in-memory cache
     const imageCache = {};
 
-    const preloadImage = (src, id, priority = 'low') => {
-      // Skip if already in cache
-      if (imageCache[src]) {
-        if (isMounted) {
-          setLoadedImages(prev => ({ ...prev, [id]: true }));
-        }
+    const preloadImage = (src, id) => {
+      // Skip if already loaded in state
+      if (loadedImages?.[id]) {
         return Promise.resolve();
       }
 
       return new Promise((resolve) => {
         const img = new Image();
         imageRefs.set(id, img);
-        
-        // Set loading priority (fetchpriority is a newer attribute)
-        if ('fetchPriority' in HTMLImageElement.prototype) {
-          img.fetchPriority = priority;
-        }
-        
+
         img.onload = () => {
           if (isMounted) {
+            setLoadedImages((prev) => ({ ...prev, [id]: true }));
             imageCache[src] = true;
-            setLoadedImages(prev => ({ ...prev, [id]: true }));
           }
           resolve();
         };
-        
+
         img.onerror = () => {
+          console.error(`Failed to load image: ${src}`);
+          // Still mark as loaded to avoid blocking
           if (isMounted) {
-            setLoadedImages(prev => ({ ...prev, [id]: true }));
+            setLoadedImages((prev) => ({ ...prev, [id]: true }));
           }
           resolve();
         };
-        
-        // Set decode attribute for better performance
-        img.decoding = 'async';
+
+        // Simple approach - just set the src
         img.src = src;
       });
     };
 
     const preloadAllImages = async () => {
-      // On mobile, only preload current and next slide
-      if (isMobileDevice) {
-        // Current slide
-        await preloadImage(slideData[currentSlide].image, slideData[currentSlide].id, 'high');
-        
-        // Next slide
-        const nextIndex = currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
-        await preloadImage(slideData[nextIndex].image, slideData[nextIndex].id, 'high');
-      } 
-      // On desktop, preload all slides
-      else {
-        // First load current and next slide with high priority
-        await preloadImage(slideData[currentSlide].image, slideData[currentSlide].id, 'high');
-        
-        const nextIndex = currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
-        await preloadImage(slideData[nextIndex].image, slideData[nextIndex].id, 'high');
-        
-        // Then load the rest in the background
-        const otherSlides = slideData.filter((_, index) => 
-          index !== currentSlide && index !== nextIndex
-        );
-        
-        await Promise.all(
-          otherSlides.map(slide => 
-            preloadImage(slide.image, slide.id, 'low')
-          )
-        );
+      try {
+        // Always preload all images, but prioritize current and next
+        const currentImage = validateImageUrls[currentSlide].image;
+        const nextIndex =
+          currentSlide === validateImageUrls.length - 1 ? 0 : currentSlide + 1;
+        const nextImage = validateImageUrls[nextIndex].image;
+
+        // Load current and next slide first
+        await Promise.all([
+          preloadImage(currentImage, validateImageUrls[currentSlide].id),
+          preloadImage(nextImage, validateImageUrls[nextIndex].id),
+        ]);
+
+        // Then load any remaining slides
+        if (validateImageUrls.length > 2) {
+          validateImageUrls.forEach((slide, index) => {
+            if (index !== currentSlide && index !== nextIndex) {
+              preloadImage(slide.image, slide.id);
+            }
+          });
+        }
+      } catch (error) {
+        console.error("Error preloading images:", error);
       }
     };
 
@@ -192,19 +206,19 @@ const HeroSection = ({
       for (const img of imageRefs.values()) {
         img.onload = null;
         img.onerror = null;
-        img.src = '';
+        img.src = "";
       }
       imageRefs.clear();
     };
-  }, [slideData, currentSlide, isMobileDevice]);
+  }, [validateImageUrls, currentSlide, loadedImages]);
 
-  const currentSlideData = slideData[currentSlide];
-  const isCurrentLoaded = loadedImages[currentSlideData.id];
+  const currentSlideData = validateImageUrls[currentSlide];
+  const isCurrentLoaded = loadedImages?.[currentSlideData.id];
 
   // Get next slide data for the animation
   const nextSlideData =
-    nextSlideIndex !== null ? slideData[nextSlideIndex] : null;
-  const isNextLoaded = nextSlideData ? loadedImages[nextSlideData.id] : false;
+    nextSlideIndex !== null ? validateImageUrls[nextSlideIndex] : null;
+  const isNextLoaded = nextSlideData ? loadedImages?.[nextSlideData.id] : false;
 
   // Pause auto-slide when user interacts with navigation
   const handleNavClick = (direction) => {
