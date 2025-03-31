@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { Blurhash } from "react-blurhash";
 import { RiFilePaper2Fill } from "react-icons/ri";
+import SwanWoodImg from "../../assets/swan-wood-cdgr.jpg";
 
 const HeroSection = ({
   slides = [],
@@ -32,12 +33,12 @@ const HeroSection = ({
         subtitle:
           "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",
       },
+
       {
         id: 2,
         // Use a different URL format that might be more reliable
-        image:
-          "https://static.toiimg.com/thumb/msid-92378232,width-1280,height-720,imgsize-99230,resizemode-72,overlay-toi_sw,pt-32,y_pad-40/photo.jpg",
-        blurhash: "LsDmp*oynio#PqbbWCkD-Yn,kVbI",
+        image: SwanWoodImg,
+        blurhash: "LDHnjHb_9[WC?vxa56V[*0WB9FIo",
         title: "Premium Timber Solutions",
         subtitle:
           "Sal, Eucalyptus, Akashmoni & More, Delivered with Excellence",

@@ -48,6 +48,9 @@ body {
 }
 
 @layer utilities {
+	.btn-brand-yellow {
+		@apply os-regular flex justify-center items-center gap-2 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black hover:scale-[105%] transition-all ease-in-out duration-200;
+	}
 	.os-light {
 		font-family: "Signika", sans-serif;
 		font-optical-sizing: auto;
@@ -97,4 +100,101 @@ body {
 
 .shadow-medium {
 	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.header-gradient {
+	background-image: linear-gradient(
+			0deg,
+			rgb(164, 211, 160) 0%,
+			rgb(164, 211, 160) 22%,
+			rgb(141, 190, 127) 22%,
+			rgb(141, 190, 127) 61%,
+			rgb(117, 169, 93) 61%,
+			rgb(117, 169, 93) 68%,
+			rgb(94, 147, 60) 68%,
+			rgb(94, 147, 60) 92%,
+			rgb(70, 126, 26) 92%,
+			rgb(70, 126, 26) 100%
+		),
+		linear-gradient(
+			135deg,
+			rgb(164, 211, 160) 0%,
+			rgb(164, 211, 160) 22%,
+			rgb(141, 190, 127) 22%,
+			rgb(141, 190, 127) 61%,
+			rgb(117, 169, 93) 61%,
+			rgb(117, 169, 93) 68%,
+			rgb(94, 147, 60) 68%,
+			rgb(94, 147, 60) 92%,
+			rgb(70, 126, 26) 92%,
+			rgb(70, 126, 26) 100%
+		),
+		linear-gradient(
+			90deg,
+			rgb(164, 211, 160) 0%,
+			rgb(164, 211, 160) 22%,
+			rgb(141, 190, 127) 22%,
+			rgb(141, 190, 127) 61%,
+			rgb(117, 169, 93) 61%,
+			rgb(117, 169, 93) 68%,
+			rgb(94, 147, 60) 68%,
+			rgb(94, 147, 60) 92%,
+			rgb(70, 126, 26) 92%,
+			rgb(70, 126, 26) 100%
+		), linear-gradient(90deg, rgb(255, 159, 173), rgb(82, 81, 20));
+	background-blend-mode: overlay, overlay, overlay, normal;
+}
+
+.text-gradient {
+	background-image: linear-gradient(
+			195deg,
+			rgb(173, 173, 173),
+			rgb(129, 129, 129)
+		),
+		linear-gradient(
+			195deg,
+			rgb(91, 131, 23) 0%,
+			rgb(91, 131, 23) 65%,
+			rgb(110, 144, 39) 65%,
+			rgb(110, 144, 39) 67%,
+			rgb(128, 157, 55) 67%,
+			rgb(128, 157, 55) 71%,
+			rgb(147, 169, 70) 71%,
+			rgb(147, 169, 70) 74%,
+			rgb(165, 182, 86) 74%,
+			rgb(165, 182, 86) 93%,
+			rgb(184, 195, 102) 93%,
+			rgb(184, 195, 102) 100%
+		),
+		linear-gradient(
+			67.5deg,
+			rgb(91, 131, 23) 0%,
+			rgb(91, 131, 23) 65%,
+			rgb(110, 144, 39) 65%,
+			rgb(110, 144, 39) 67%,
+			rgb(128, 157, 55) 67%,
+			rgb(128, 157, 55) 71%,
+			rgb(147, 169, 70) 71%,
+			rgb(147, 169, 70) 74%,
+			rgb(165, 182, 86) 74%,
+			rgb(165, 182, 86) 93%,
+			rgb(184, 195, 102) 93%,
+			rgb(184, 195, 102) 100%
+		),
+		linear-gradient(
+			157.5deg,
+			rgb(91, 131, 23) 0%,
+			rgb(91, 131, 23) 65%,
+			rgb(110, 144, 39) 65%,
+			rgb(110, 144, 39) 67%,
+			rgb(128, 157, 55) 67%,
+			rgb(128, 157, 55) 71%,
+			rgb(147, 169, 70) 71%,
+			rgb(147, 169, 70) 74%,
+			rgb(165, 182, 86) 74%,
+			rgb(165, 182, 86) 93%,
+			rgb(184, 195, 102) 93%,
+			rgb(184, 195, 102) 100%
+		);
+	background-blend-mode: overlay, overlay, overlay, normal;
 }
