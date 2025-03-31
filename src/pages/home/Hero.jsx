@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import { Blurhash } from "react-blurhash";
 import { RiFilePaper2Fill } from "react-icons/ri";
 
@@ -99,18 +99,34 @@ const HeroSection = ({
 
   // Preload all images on initial render
   useEffect(() => {
+    const imageRefs = new Map();
+    let isMounted = true;
+
     const preloadAllImages = async () => {
       const imagePromises = slideData.map((slide) => {
         return new Promise((resolve) => {
+          // Check if image is already loaded
+          if (loadedImages[slide.id]) {
+            resolve();
+            return;
+          }
+
           const img = new Image();
+          imageRefs.set(slide.id, img);
           img.src = slide.image;
+          
           img.onload = () => {
-            setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
+            if (isMounted) {
+              setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
+            }
             resolve();
           };
+          
           img.onerror = () => {
             // Still mark as loaded to avoid blocking on error
-            setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
+            if (isMounted) {
+              setLoadedImages((prev) => ({ ...prev, [slide.id]: true }));
+            }
             resolve();
           };
         });
@@ -119,25 +135,56 @@ const HeroSection = ({
       // Load next slide with higher priority
       const nextIndex =
         currentSlide === slideData.length - 1 ? 0 : currentSlide + 1;
-      const nextSlidePromise = new Promise((resolve) => {
-        const img = new Image();
-        img.src = slideData[nextIndex].image;
-        img.onload = () => {
-          setLoadedImages((prev) => ({
-            ...prev,
-            [slideData[nextIndex].id]: true,
-          }));
-          resolve();
-        };
-      });
+      
+      // Only preload next slide if it's not already loaded
+      if (!loadedImages[slideData[nextIndex].id]) {
+        const nextSlidePromise = new Promise((resolve) => {
+          const img = new Image();
+          imageRefs.set(`next_${slideData[nextIndex].id}`, img);
+          img.src = slideData[nextIndex].image;
+          
+          img.onload = () => {
+            if (isMounted) {
+              setLoadedImages((prev) => ({
+                ...prev,
+                [slideData[nextIndex].id]: true,
+              }));
+            }
+            resolve();
+          };
+          
+          img.onerror = () => {
+            if (isMounted) {
+              setLoadedImages((prev) => ({
+                ...prev,
+                [slideData[nextIndex].id]: true,
+              }));
+            }
+            resolve();
+          };
+        });
 
-      // Wait for next slide to load first, then load the others
-      await nextSlidePromise;
+        // Wait for next slide to load first, then load the others
+        await nextSlidePromise;
+      }
+      
       await Promise.all(imagePromises);
     };
 
     preloadAllImages();
-  }, [slideData, currentSlide]);
+
+    // Cleanup function to prevent memory leaks
+    return () => {
+      isMounted = false;
+      // Clear all image references
+      for (const img of imageRefs.values()) {
+        img.onload = null;
+        img.onerror = null;
+        img.src = '';
+      }
+      imageRefs.clear();
+    };
+  }, [slideData, currentSlide, loadedImages]);
 
   const currentSlideData = slideData[currentSlide];
   const isCurrentLoaded = loadedImages[currentSlideData.id];
