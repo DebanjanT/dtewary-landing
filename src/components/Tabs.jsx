@@ -52,7 +52,7 @@ const TabItem = memo(
                 ? "text-brand-green"
                 : "text-brand-blackLight hover:text-brand-green"
             } 
-              px-3 text-[14px] flex justify-center items-center gap-1 ${
+              px-3 text-[14px] flex justify-center items-center gap-1 font-normal ${
                 hasDropdown
                   ? "cursor-pointer"
                   : isActive

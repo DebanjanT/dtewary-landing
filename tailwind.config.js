@@ -25,6 +25,9 @@ export default {
           gray:{
             light:"#A1B9CB",
             dark:"#597A84"
+          },
+          input:{
+            background:"#f4f3f3"
           }
         },
         brand:{

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -48,15 +48,22 @@ body {
 }
 
 @layer utilities {
+	.os-light {
+		font-family: "Signika", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 300;
+		font-style: normal;
+		font-variation-settings: "wdth" 100;
+	}
 	.os-regular {
-		font-family: "Open Sans", sans-serif;
+		font-family: "Signika", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 400;
 		font-style: normal;
 		font-variation-settings: "wdth" 100;
 	}
 	.os-bold {
-		font-family: "Open Sans", sans-serif;
+		font-family: "Signika", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 700;
 		font-style: normal;
@@ -64,7 +71,7 @@ body {
 	}
 
 	.os-semibold {
-		font-family: "Open Sans", sans-serif;
+		font-family: "Signika", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 600;
 		font-style: normal;
@@ -72,7 +79,7 @@ body {
 	}
 
 	.os-medium {
-		font-family: "Open Sans", sans-serif;
+		font-family: "Signika", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: 500;
 		font-style: normal;
