@@ -52,7 +52,7 @@ const Contact = () => {
                     />
                   </svg>
                 </div>
-                <h2 className=" text-pretty text-5xl font-bold tracking-tight text-transparent text-gradient bg-clip-text drop-shadow">
+                <h2 className=" text-pretty text-5xl font-bold tracking-tight text-brand-green drop-shadow">
                   Get in touch
                 </h2>
                 <p className="mt-6 text-lg/8 text-gray-600 os-light">

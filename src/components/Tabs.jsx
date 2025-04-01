@@ -40,7 +40,7 @@ const TabItem = memo(
           }
         }}
         ref={dropdownRef}
-        className={`border-b-2 w-fit py-2 cursor-pointer ${
+        className={`border-b-2 w-fit py-2 cursor-pointer flex-shrink-0 ${
           isActive ? "border-brand-green" : "border-transparent"
         }`}
       >

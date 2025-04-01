@@ -11,7 +11,7 @@ const About = () => {
           {/* Hero Section - Minimal */}
           <div className="mb-10">
             <img src={shining32Icon} alt="Shining" />
-            <h1 className="text-pretty text-5xl font-bold tracking-tight text-transparent text-gradient bg-clip-text drop-shadow mb-4">
+            <h1 className="text-pretty text-5xl font-bold tracking-tight text-brand-green drop-shadow mb-4">
               About Us
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl os-regular">
@@ -39,7 +39,7 @@ const About = () => {
               Our Primary Products
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="bg-white p-6 shadow-sm shadow-brand-green border border-gray-100 rounded-lg ">
+              <div className="bg-white p-6 border border-gray-200 rounded-lg ">
                 <h3 className="text-xl os-semibold text-brand-green mb-3">
                   Eucalyptus
                 </h3>
@@ -48,7 +48,7 @@ const About = () => {
                   supports.
                 </p>
               </div>
-              <div className="bg-white p-6 shadow-sm shadow-brand-green border border-gray-100 rounded-lg">
+              <div className="bg-white p-6  border border-gray-200 rounded-lg">
                 <h3 className="text-xl os-semibold text-brand-green mb-3">
                   Sal
                 </h3>
@@ -56,7 +56,7 @@ const About = () => {
                   Premium hardwood known for its strength and natural beauty.
                 </p>
               </div>
-              <div className="bg-white p-6 shadow-sm shadow-brand-green border border-gray-100 rounded-lg">
+              <div className="bg-white p-6  border border-gray-200 rounded-lg">
                 <h3 className="text-xl os-semibold text-brand-green mb-3">
                   Akashmoni
                 </h3>
@@ -80,8 +80,9 @@ const About = () => {
               <div className="text-center">
                 <div className="w-48 h-48 rounded-full bg-gray-100 mx-auto mb-4 overflow-hidden">
                   <img
-                    src="https://placehold.co/400x400/f5f5f5/367C2B?text=DT&font=opensans"
+                    src="https://dtewary-dev-storage.innoida.utho.io/our_team_image/team_dibyendu_tewary.jpg"
                     alt="Dibyendu Tewary"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -98,8 +99,9 @@ const About = () => {
               <div className="text-center">
                 <div className="w-48 h-48 rounded-full bg-gray-100 mx-auto mb-4 overflow-hidden">
                   <img
-                    src="https://placehold.co/400x400/f5f5f5/367C2B?text=AM&font=opensans"
-                    alt="Rajesh Kumar"
+                    src="https://dtewary-dev-storage.innoida.utho.io/our_team_image/team_amajhi.jpg"
+                    alt="Ananda Majhi"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -116,15 +118,16 @@ const About = () => {
               <div className="text-center">
                 <div className="w-48 h-48 rounded-full bg-gray-100 mx-auto mb-4 overflow-hidden">
                   <img
-                    src="https://placehold.co/400x400/f5f5f5/367C2B?text=DT&font=opensans"
-                    alt="Arjun Tewary"
+                    src="https://dtewary-dev-storage.innoida.utho.io/our_team_image/team_debanjan_tewary.jpg"
+                    alt="Debanjan Tewary"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <h3 className="text-xl font-semibold text-brand-green">
                   Debanjan Tewary
                 </h3>
-                <p className="text-gray-600 mb-2">Techinal Operator</p>
+                <p className="text-gray-600 mb-2">Techinal Head</p>
                 <p className="text-gray-500 text-sm">
                   Bringing innovation to our traditional timber business
                 </p>

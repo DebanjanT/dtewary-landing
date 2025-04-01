@@ -49,10 +49,10 @@ const Navigation = ({ page }) => {
           navigate("/contact");
         },
       },
-      {
-        label: "Gallery",
-        Prefix: galleryIcon,
-      },
+      // {
+      //   label: "Gallery",
+      //   Prefix: galleryIcon,
+      // },
     ],
     []
   );
@@ -92,7 +92,7 @@ const Navigation = ({ page }) => {
           />
         </div>
       </div>
-      <div className="hidden sm:block">
+      <div className="overflow-scroll scrollbar-hide">
         {/* Menu */}
         <Tabs
           tabs={tabsData}

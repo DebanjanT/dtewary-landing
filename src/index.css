@@ -48,6 +48,11 @@ body {
 }
 
 @layer utilities {
+	.scrollbar-hide {
+		-ms-overflow-style: none; /* Internet Explorer 10+ */
+		scrollbar-width: none; /* Firefox */
+	}
+
 	.btn-brand-yellow {
 		@apply os-regular flex justify-center items-center gap-2 font-semibold hover:opacity-90 bg-brand-yellow text-brand-black hover:scale-[105%] transition-all ease-in-out duration-200;
 	}
