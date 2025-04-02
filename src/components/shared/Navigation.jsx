@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Input from "../../components/Input";
 import Tabs from "../../components/Tabs";
 import { useNavigate } from "react-router-dom";
@@ -7,7 +7,13 @@ import houseIcon from "../../assets/house.png";
 import galleryIcon from "../../assets/gallery.png";
 import chatBoxIcon from "../../assets/chat-box.png";
 import LoupeIcon from "../../assets/loupe.png";
+import { useAuth } from "../../context/AuthContext";
+import LoginModal from "../../components/LoginModal";
+
 const Navigation = ({ page }) => {
+  const { currentUser, logout } = useAuth();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  
   const activeTab = useMemo(() => {
     switch (page) {
       case "Home":
@@ -69,6 +75,16 @@ const Navigation = ({ page }) => {
 
     []
   );
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate("/");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <>
       {/* Navigation */}
@@ -84,12 +100,36 @@ const Navigation = ({ page }) => {
             DIBYENDU TEWARY
           </h1>
         </div>
-        <div className="hidden sm:block">
-          <Input
-            placeholder="Search"
-            containerClassName="w-[220px]"
-            prefixSvg={LoupeIcon}
-          />
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:block">
+            <Input
+              placeholder="Search"
+              containerClassName="w-[220px]"
+              prefixSvg={LoupeIcon}
+            />
+          </div>
+          {currentUser ? (
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-gray-600 hidden md:inline-block">
+                {currentUser.displayName || currentUser.email}
+              </span>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="text-sm px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md transition-colors"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setShowLoginModal(true)}
+              className="text-sm px-3 py-1 bg-brand-yellow hover:bg-yellow-500 rounded-md transition-colors"
+            >
+              Login
+            </button>
+          )}
         </div>
       </div>
       <div className="overflow-scroll scrollbar-hide">
@@ -100,6 +140,7 @@ const Navigation = ({ page }) => {
           onChange={handleTabChange}
         />
       </div>
+      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
     </>
   );
 };

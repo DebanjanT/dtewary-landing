@@ -2,14 +2,22 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Contact from "./pages/contact";
 import About from "./pages/about";
+import { AuthProvider } from "./context/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={
+          <ProtectedRoute>
+            <Contact />
+          </ProtectedRoute>
+        } />
+        <Route path="/about" element={<About />} />
+      </Routes>
+    </AuthProvider>
   );
 };
 
