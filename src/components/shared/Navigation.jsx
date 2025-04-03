@@ -13,7 +13,7 @@ import LoginModal from "../../components/LoginModal";
 const Navigation = ({ page }) => {
   const { currentUser, logout } = useAuth();
   const [showLoginModal, setShowLoginModal] = useState(false);
-  
+
   const activeTab = useMemo(() => {
     switch (page) {
       case "Home":
@@ -22,10 +22,12 @@ const Navigation = ({ page }) => {
         return 1;
       case "Contact":
         return 2;
-      case "Gallery":
+      case "UI Components":
         return 3;
+      case "Gallery":
+        return 4;
       default:
-        return 0;
+        return -1;
     }
   }, [page]);
 
@@ -55,6 +57,7 @@ const Navigation = ({ page }) => {
           navigate("/contact");
         },
       },
+
       // {
       //   label: "Gallery",
       //   Prefix: galleryIcon,
@@ -140,7 +143,10 @@ const Navigation = ({ page }) => {
           onChange={handleTabChange}
         />
       </div>
-      <LoginModal isOpen={showLoginModal} onClose={() => setShowLoginModal(false)} />
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+      />
     </>
   );
 };

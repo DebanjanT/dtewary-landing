@@ -15,11 +15,14 @@ const LoginModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div className="fixed inset-0 header-gradient flex items-center justify-center z-50">
       <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full">
-        <h2 className="text-2xl font-bold text-brand-green mb-6">Sign In Required</h2>
+        <h2 className="text-2xl font-bold text-brand-green mb-6">
+          LogIn Required
+        </h2>
         <p className="mb-6 text-gray-600">
-          You need to sign in to access the contact form. Please sign in with your Google account.
+          You need to sign in to access the restricted areas. Please sign in
+          with your Google account.
         </p>
         <div className="flex flex-col gap-4">
           <button
@@ -27,7 +30,12 @@ const LoginModal = ({ isOpen, onClose }) => {
             onClick={handleGoogleLogin}
             className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-md py-2 px-4 text-gray-700 hover:bg-gray-50 transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-labelledby="googleIconTitle">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              aria-labelledby="googleIconTitle"
+            >
               <title id="googleIconTitle">Google Icon</title>
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -46,7 +54,7 @@ const LoginModal = ({ isOpen, onClose }) => {
                 fill="#EA4335"
               />
             </svg>
-            Sign in with Google
+            Log in with Google
           </button>
           <button
             type="button"

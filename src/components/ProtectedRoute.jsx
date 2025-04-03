@@ -28,15 +28,17 @@ const ProtectedRoute = ({ children }) => {
     // Navigate back to home if user closes modal without logging in
     if (!currentUser) {
       window.location.href = "/";
+    } else {
+      window.location.href = location.pathname;
     }
   };
 
   return (
     <>
       {children}
-      <LoginModal 
-        isOpen={showLoginModal && !currentUser} 
-        onClose={handleCloseModal} 
+      <LoginModal
+        isOpen={showLoginModal && !currentUser}
+        onClose={handleCloseModal}
       />
     </>
   );
