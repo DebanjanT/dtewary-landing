@@ -4,7 +4,6 @@ import Tabs from "../../components/Tabs";
 import { useNavigate } from "react-router-dom";
 import manIcon from "../../assets/man.png";
 import houseIcon from "../../assets/house.png";
-import galleryIcon from "../../assets/gallery.png";
 import chatBoxIcon from "../../assets/chat-box.png";
 import LoupeIcon from "../../assets/loupe.png";
 import { useAuth } from "../../context/AuthContext";

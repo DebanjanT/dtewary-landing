@@ -62,7 +62,7 @@ const TabItem = memo(
           >
             {Prefix &&
               (typeof Prefix === "string" ? (
-                <img src={Prefix} alt={label} />
+                <img loading="lazy" src={Prefix} alt={label} />
               ) : (
                 // create icon component
                 <Prefix className="w-5 h-5" />
@@ -107,7 +107,7 @@ const TabItem = memo(
               >
                 {item.Prefix &&
                   (typeof item.Prefix === "string" ? (
-                    <img src={item.Prefix} alt={label} />
+                    <img loading="lazy" src={item.Prefix} alt={label} />
                   ) : (
                     // create icon component
                     <item.Prefix className="w-5 h-5" />

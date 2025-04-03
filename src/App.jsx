@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Contact from "./pages/contact";
 import About from "./pages/about";
@@ -20,8 +20,14 @@ import ToggleDoc from "./pages/ui/toggle";
 import TooltipDoc from "./pages/ui/tooltip";
 import UIPage from "./pages/ui";
 import InvoicePage from "./pages/invoice";
+import { useEffect } from "react";
 
 const App = () => {
+  const location = useLocation();
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   return (
     <AuthProvider>
       <Routes>

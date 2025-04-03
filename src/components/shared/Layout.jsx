@@ -1,3 +1,4 @@
+import Footer from "./Footer";
 import Navigation from "./Navigation";
 
 const Layout = ({ children, page, headerGradient = false }) => {
@@ -8,6 +9,7 @@ const Layout = ({ children, page, headerGradient = false }) => {
       </div>
       {headerGradient && <div className="header-gradient w-full h-1" />}
       {children}
+      <Footer />
     </div>
   );
 };

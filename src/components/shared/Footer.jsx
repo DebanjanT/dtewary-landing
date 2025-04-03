@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ArrowRight from "../../assets/arrow-right.png";
+import EngineerIcon from "../../assets/engineer.png";
+
 /**
  * Footer component for the application
  * @returns {JSX.Element}
@@ -16,6 +18,7 @@ const Footer = () => {
           {/* About Company */}
           <div className="space-y-6">
             <img
+              loading="lazy"
               src="https://dtewary-dev-storage.innoida.utho.io/logo/dtewary-logo.png"
               alt="Logo"
               className="w-32 h-auto drop-shadow-lg"
@@ -30,27 +33,60 @@ const Footer = () => {
           </div>
 
           {/* Products/Services */}
-          <div>
-            <h3 className="text-lg text-black font-bold border-b-2 border-green-200 pb-2 mb-4 inline-block">
-              OPEN SOURCE
-            </h3>
-            <ul className="space-y-2 text-green-100">
+          <div className="">
+            <div className="flex items-center justify-start pb-2 mb-4">
+              <img
+                loading="lazy"
+                src={EngineerIcon}
+                alt="Engineer"
+                className="w-10 h-auto mr-1"
+              />
+              <h3 className="text-lg text-black font-bold  inline-block">
+                OPEN SOURCE
+              </h3>
+            </div>
+            <ul className="space-y-2 text-green-100 border-l border-dashed border-green-300/40">
               <li className="flex items-center">
-                <img src={ArrowRight} alt="Arrow" className="w-4 h-4 mr-1" />
-                <Link
-                  to="/oss/web-components"
-                  className="hover:text-brand-yellow transition-colors"
-                >
-                  Web Components
-                </Link>
-              </li>
-              <li className="flex items-center">
-                <img src={ArrowRight} alt="Arrow" className="w-4 h-4 mr-1" />{" "}
+                <img
+                  loading="lazy"
+                  src={ArrowRight}
+                  alt="Arrow"
+                  className="w-4 h-4 mr-1"
+                />{" "}
                 <Link
                   to="/oss/invoice"
                   className="hover:text-brand-yellow transition-colors"
                 >
                   Invoice Maker{" "}
+                </Link>
+              </li>
+              <li className="flex items-center">
+                <img
+                  loading="lazy"
+                  src={ArrowRight}
+                  alt="Arrow"
+                  className="w-4 h-4 mr-1"
+                />{" "}
+                <a
+                  href="https://www.npmjs.com/package/@dtewary/tw-polaris"
+                  to="/oss/invoice"
+                  className="hover:text-brand-yellow transition-colors"
+                >
+                  Tailwind Polaris{" "}
+                </a>
+              </li>
+              <li className="flex items-center">
+                <img
+                  loading="lazy"
+                  src={ArrowRight}
+                  alt="Arrow"
+                  className="w-4 h-4 mr-1"
+                />
+                <Link
+                  to="/oss/web-components"
+                  className="hover:text-brand-yellow transition-colors"
+                >
+                  Web Components
                 </Link>
               </li>
             </ul>

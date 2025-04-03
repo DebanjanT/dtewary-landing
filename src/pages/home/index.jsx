@@ -1,7 +1,6 @@
 import HeroSection from "./Hero";
 import Layout from "../../components/shared/Layout";
 import informationIcon from "../../assets/information.png";
-import Footer from "../../components/shared/Footer";
 const Home = () => {
   return (
     <Layout page="Home" headerGradient={true}>
@@ -22,7 +21,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </Layout>
   );
 };
