@@ -98,8 +98,8 @@ const Navigation = ({ page }) => {
             alt="Logo"
             className="w-14 h-auto"
           />
-          <h1 className="text-xl text- font-bold text-green-700">
-            DIBYENDU TEWARY
+          <h1 className="text-2xl font-bold text-brand-green">
+            Dibyendu Tewary
           </h1>
         </div>
         <div className="flex items-center gap-4">
