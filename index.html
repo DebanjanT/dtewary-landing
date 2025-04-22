@@ -38,27 +38,29 @@
         pointer-events: none;
       }
     </style>
-        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     
-    <!-- App Loader with Lottie Animation -->
     <div id="app-loader">
       <div class="lottie-container">
         <lottie-player
-          src="tree.json"
+          src="/src/components/tree.json"
           background="transparent"
           speed="1"
-          style="width: 100%; height: 100%;"
+          style="width: 100%; height: 100%"
           loop
           autoplay
         ></lottie-player>
       </div>
-      <p class="loading-text text-3xl os-bold text-brand-green">DIBYENDU TEWARY</p>
+      <p class="loading-text" style="font-size: 1.875rem; font-weight: bold; color: #16a34a;">
+        DIBYENDU TEWARY
+      </p>
       <p class="loading-text">Crafting Your Experience...</p>
     </div>
+    
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
