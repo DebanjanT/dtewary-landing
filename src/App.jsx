@@ -21,7 +21,6 @@ import TooltipDoc from "./pages/ui/tooltip";
 import UIPage from "./pages/ui";
 import InvoicePage from "./pages/invoice";
 import { useEffect } from "react";
-import Loader from "./components/Loader";
 
 // Function to hide the loader
 const hideLoader = () => {
@@ -31,7 +30,7 @@ const hideLoader = () => {
     // Remove the loader from DOM after transition completes
     setTimeout(() => {
       loader.remove();
-    }, 600);
+    }, 1200);
   }
 };
 
@@ -51,7 +50,6 @@ const App = () => {
     <AuthProvider>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/loader" element={<Loader />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
         <Route path="/oss/invoice" element={<InvoicePage />} />
