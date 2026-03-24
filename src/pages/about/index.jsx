@@ -287,75 +287,144 @@ const About = () => {
         </div>
       </section>
 
-      {/* Commitment Section - Split Design */}
+      {/* Plantation & Green Initiative Section */}
       <section className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-brand-green to-emerald-700" />
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-800 via-brand-green to-emerald-700" />
+
+        {/* Decorative leaves pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <pattern id="leaves" patternUnits="userSpaceOnUse" width="50" height="50">
+              <text x="10" y="30" fontSize="20">🌿</text>
+              <text x="35" y="15" fontSize="15">🌱</text>
+            </pattern>
+            <rect width="100%" height="100%" fill="url(#leaves)" />
+          </svg>
+        </div>
 
         <div className="relative max-w-6xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row gap-12 items-center">
-            {/* Left - Content */}
-            <div className="flex-1 text-white">
-              <span className="inline-block px-4 py-1 bg-white/20 text-white text-sm font-medium rounded-full mb-6">
-                Our Promise
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Commitment to Sustainability
-              </h2>
-              <p className="text-white/80 text-lg leading-relaxed mb-8">
-                At our company, we believe in responsible forestry practices that preserve
-                our natural resources for future generations. Our commitment to sustainability
-                guides every aspect of our business.
-              </p>
+          {/* Section Header */}
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1 bg-white/20 text-white text-sm font-medium rounded-full mb-4">
+              Growing Green Together
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Our Plantation Initiatives
+            </h2>
+            <p className="text-white/80 text-lg max-w-2xl mx-auto">
+              We believe in giving back to nature. Every tree we use, we strive to plant many more.
+            </p>
+          </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: "🌱", text: "Sustainable Harvesting" },
-                  { icon: "🌳", text: "Reforestation Initiatives" },
-                  { icon: "♻️", text: "Efficient Processing" },
-                  { icon: "🤝", text: "Community Partnerships" },
-                ].map((item) => (
-                  <div
-                    key={item.text}
-                    className="flex items-center gap-3 p-3 bg-white/10 rounded-xl"
-                  >
-                    <span className="text-2xl">{item.icon}</span>
-                    <span className="text-sm font-medium">{item.text}</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left - Our Efforts */}
+            <div className="space-y-6">
+              {/* Government Events */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">🏛️</span>
                   </div>
-                ))}
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Government Plantation Drives
+                    </h3>
+                    <p className="text-white/80 leading-relaxed">
+                      We actively participate in all government-organized plantation events and drives.
+                      From Van Mahotsav to local forest department initiatives, our team is always
+                      present to contribute to the green movement.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Timber Depo Plantation */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">🌳</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Our Timber Depo Garden
+                    </h3>
+                    <p className="text-white/80 leading-relaxed">
+                      Within our own timber depot premises, we have planted and nurture various types
+                      of trees. From fruit-bearing trees to native species, our depot is not just a
+                      workplace but a small forest in itself.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Community Efforts */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                    <span className="text-2xl">🤝</span>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-white mb-2">
+                      Community Partnerships
+                    </h3>
+                    <p className="text-white/80 leading-relaxed">
+                      We work with local communities and schools to spread awareness about the
+                      importance of trees. We donate saplings and guide people on how to care
+                      for young plants.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Right - Green Promise Card */}
-            <div className="flex-1 w-full max-w-md">
-              <div className="relative bg-white rounded-3xl p-8 shadow-2xl">
+            {/* Right - Promise Card */}
+            <div className="flex items-center">
+              <div className="relative bg-white rounded-3xl p-8 shadow-2xl w-full">
                 {/* Decorative leaf */}
                 <div className="absolute -top-6 -right-6 w-24 h-24 bg-brand-yellow rounded-full flex items-center justify-center shadow-lg">
                   <span className="text-4xl">🌿</span>
                 </div>
 
                 <h3 className="text-2xl font-bold text-stone-800 mb-4 pr-16">
-                  Our Green Promise
+                  Our Green Philosophy
                 </h3>
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="text-5xl font-bold text-brand-green">2:1</div>
-                  <div className="text-stone-600">
-                    Trees planted for<br />every tree harvested
+
+                <blockquote className="text-lg text-stone-600 italic border-l-4 border-brand-green pl-4 mb-6">
+                  "We take from nature, so we must give back. Every sapling we plant is our way of
+                  saying thank you to the forests that sustain our livelihood."
+                </blockquote>
+
+                <p className="text-stone-600 leading-relaxed mb-6">
+                  We try our best to plant and grow as many trees as possible. It's not just business
+                  for us — it's our responsibility to ensure that future generations inherit greener forests.
+                </p>
+
+                {/* What We Plant */}
+                <div className="bg-stone-50 rounded-xl p-4">
+                  <h4 className="text-sm font-semibold text-stone-500 uppercase tracking-wider mb-3">
+                    Trees We Plant & Nurture
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {["Mango", "Neem", "Banyan", "Eucalyptus", "Bamboo", "Jackfruit", "Teak"].map((tree) => (
+                      <span
+                        key={tree}
+                        className="px-3 py-1 bg-brand-green/10 text-brand-green text-sm rounded-full"
+                      >
+                        {tree}
+                      </span>
+                    ))}
                   </div>
                 </div>
-                <p className="text-stone-600 leading-relaxed">
-                  Ensuring the sustainability of our forests and contributing to a greener planet
-                  for future generations.
-                </p>
 
                 {/* Stats */}
                 <div className="grid grid-cols-2 gap-4 mt-6 pt-6 border-t border-stone-200">
                   <div>
-                    <div className="text-2xl font-bold text-brand-green">50+</div>
-                    <div className="text-sm text-stone-500">Years of Legacy</div>
+                    <div className="text-2xl font-bold text-brand-green">Every Year</div>
+                    <div className="text-sm text-stone-500">Active Participation</div>
                   </div>
                   <div>
-                    <div className="text-2xl font-bold text-brand-green">1000+</div>
-                    <div className="text-sm text-stone-500">Trees Planted</div>
+                    <div className="text-2xl font-bold text-brand-green">100+</div>
+                    <div className="text-sm text-stone-500">Trees in Our Depo</div>
                   </div>
                 </div>
               </div>

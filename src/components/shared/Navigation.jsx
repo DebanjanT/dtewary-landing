@@ -50,9 +50,9 @@ const Navigation = ({ page }) => {
                 </div>
 
                 {/* Brand Name - Classic typography */}
-                <div className="hidden sm:block">
+                <div className="">
                   <div className="flex flex-col">
-                    <span className="text-xs tracking-[0.3em] text-stone-500 uppercase font-medium">
+                    <span className="text-[10px] lg:text-xs tracking-[0.3em] text-stone-500 uppercase font-medium">
                       Trusted By Generations
                     </span>
                     <h1 className="text-xl md:text-2xl font-bold text-stone-800 tracking-tight">
