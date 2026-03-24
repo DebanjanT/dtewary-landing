@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../../components/shared/Layout";
 import { useAuth } from "../../context/AuthContext";
 import { database } from "../../firebase/config";
@@ -205,10 +206,26 @@ const Contact = () => {
             Get in <span className="text-brand-green">Touch</span>
           </h1>
 
-          <p className="text-center text-lg text-stone-600 max-w-2xl mx-auto">
+          <p className="text-center text-lg text-stone-600 max-w-2xl mx-auto mb-8">
             Whether you need timber for construction, furniture, or any other purpose,
             we're here to help. Reach out to us today.
           </p>
+
+          {/* Get a Quote Button */}
+          <div className="flex justify-center">
+            <Link
+              to="/quotation"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-brand-green to-emerald-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:from-emerald-600 hover:to-brand-green transition-all duration-300 group"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Get a Quote
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -255,24 +272,6 @@ const Contact = () => {
                     <span className="text-brand-yellow">Open:</span> Monday - Saturday, 9:00 AM - 6:00 PM
                   </p>
                 </div>
-              </div>
-
-              {/* Google Maps Embed */}
-              <div className="relative rounded-3xl overflow-hidden border-4 border-stone-200 shadow-lg w-full">
-                {/* <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-md">
-                  <span className="text-xs font-semibold text-stone-700">📍 Dibyendu Tewari Timber Dipot</span>
-                </div> */}
-                <iframe
-                  src="https://maps.google.com/maps?q=Dibyendu+Tewari+Timber+Dipot,+Chandrakona+Road,+Sarbera,+West+Bengal&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Dibyendu Tewari Timber Dipot Location"
-                  className="grayscale hover:grayscale-0 transition-all duration-500"
-                />
               </div>
             </div>
 
@@ -461,6 +460,21 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Full Width Google Maps */}
+          <div className="mt-12 relative rounded-3xl overflow-hidden border-4 border-stone-200 shadow-lg">
+            <iframe
+              src="https://maps.google.com/maps?q=Dibyendu+Tewari+Timber+Dipot,+Chandrakona+Road,+Sarbera,+West+Bengal&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Dibyendu Tewari Timber Dipot Location"
+              className="grayscale hover:grayscale-0 transition-all duration-500"
+            />
           </div>
         </div>
       </section>

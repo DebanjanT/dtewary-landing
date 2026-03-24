@@ -2,6 +2,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Home from "./pages/home";
 import Contact from "./pages/contact";
 import About from "./pages/about";
+import QuotationPage from "./pages/quotation";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UILayout from "./pages/ui/layout";
@@ -52,6 +53,14 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route
+          path="/quotation"
+          element={
+            <ProtectedRoute>
+              <QuotationPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/oss/invoice" element={<InvoicePage />} />
 
         {/* UI Documentation Routes */}
