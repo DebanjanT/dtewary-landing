@@ -274,10 +274,25 @@ const QuotationPage = () => {
     }
   };
 
+  // Format currency for PDF (avoid unicode issues)
+  const formatCurrency = (amount) => {
+    if (!amount && amount !== 0) return "Rs. 0.00";
+    return `Rs. ${Number(amount).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  };
+
   // Generate PDF for quotation
   const generatePDF = (quotation) => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
+    const downloadDateTime = new Date().toLocaleString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: true,
+    });
 
     // Header
     doc.setFillColor(41, 37, 36); // stone-800
@@ -298,7 +313,8 @@ const QuotationPage = () => {
     doc.setFontSize(8);
     doc.text("Church Rd, Chandrakona Road, Sarbera", 14, 50);
     doc.text("West Midnapore, West Bengal - 721253", 14, 55);
-    doc.text("Phone: +91-7001026851 | Email: admin@dtewary.com", 14, 60);
+    doc.text("Phone: +91-9933749960, +91-7001026851", 14, 60);
+    doc.text("Email: admin@dtewary.com", 14, 65);
 
     // Quotation Details
     doc.setFontSize(10);
@@ -312,17 +328,17 @@ const QuotationPage = () => {
 
     // Buyer Details
     doc.setFillColor(245, 245, 244); // stone-100
-    doc.rect(14, 68, pageWidth - 28, 30, "F");
+    doc.rect(14, 72, pageWidth - 28, 28, "F");
     doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
-    doc.text("INVOICE TO:", 18, 76);
+    doc.text("INVOICE TO:", 18, 80);
     doc.setFont("helvetica", "normal");
-    doc.text(quotation.buyerDetails?.companyName || "", 18, 82);
-    doc.text(quotation.buyerDetails?.address || "", 18, 88);
+    doc.text(quotation.buyerDetails?.companyName || "", 18, 86);
+    doc.text(quotation.buyerDetails?.address || "", 18, 92);
     if (quotation.buyerDetails?.gstin) {
-      doc.text(`GSTIN: ${quotation.buyerDetails.gstin}`, 18, 94);
+      doc.text(`GSTIN: ${quotation.buyerDetails.gstin}`, 18, 98);
     }
-    doc.text(`Contact: ${quotation.buyerDetails?.contactPerson || ""} | ${quotation.buyerDetails?.phone || ""}`, pageWidth / 2, 82);
+    doc.text(`Contact: ${quotation.buyerDetails?.contactPerson || ""} | ${quotation.buyerDetails?.phone || ""}`, pageWidth / 2, 86);
 
     // Items Table
     const tableData = quotation.items?.map((item, index) => [
@@ -331,12 +347,12 @@ const QuotationPage = () => {
       item.hsn,
       item.quantity,
       item.unit,
-      item.rateType === "ask" ? "Request Quote" : `₹${parseFloat(item.rate || 0).toLocaleString("en-IN")}`,
-      item.rateType === "ask" ? "-" : `₹${parseFloat(item.amount || 0).toLocaleString("en-IN")}`,
+      item.rateType === "ask" ? "Request Quote" : formatCurrency(item.rate),
+      item.rateType === "ask" ? "-" : formatCurrency(item.amount),
     ]) || [];
 
     autoTable(doc, {
-      startY: 105,
+      startY: 108,
       head: [["S.No", "Description", "HSN", "Qty", "Unit", "Rate", "Amount"]],
       body: tableData,
       theme: "grid",
@@ -348,33 +364,61 @@ const QuotationPage = () => {
         2: { cellWidth: 18 },
         3: { cellWidth: 18 },
         4: { cellWidth: 15 },
-        5: { cellWidth: 28 },
-        6: { cellWidth: 28 },
+        5: { cellWidth: 30 },
+        6: { cellWidth: 30 },
       },
     });
 
-    // Totals
+    // Totals - positioned better
     const finalY = doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 10 : 150;
     const hasRates = quotation.items?.some(item => item.rateType !== "ask");
+    const totalsX = pageWidth - 60; // Position totals section better
 
     if (hasRates && quotation.subtotal > 0) {
       doc.setFontSize(9);
-      doc.text(`Subtotal: ₹${quotation.subtotal?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, pageWidth - 14, finalY, { align: "right" });
-      doc.text(`CGST @ 9%: ₹${quotation.cgst?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, pageWidth - 14, finalY + 6, { align: "right" });
-      doc.text(`SGST @ 9%: ₹${quotation.sgst?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, pageWidth - 14, finalY + 12, { align: "right" });
+      doc.setFont("helvetica", "normal");
+
+      // Draw totals box
+      doc.setDrawColor(200, 200, 200);
+      doc.rect(totalsX - 10, finalY - 5, 65, 40);
+
+      doc.text("Subtotal:", totalsX, finalY);
+      doc.text(formatCurrency(quotation.subtotal), pageWidth - 18, finalY, { align: "right" });
+
+      doc.text("CGST @ 9%:", totalsX, finalY + 7);
+      doc.text(formatCurrency(quotation.cgst), pageWidth - 18, finalY + 7, { align: "right" });
+
+      doc.text("SGST @ 9%:", totalsX, finalY + 14);
+      doc.text(formatCurrency(quotation.sgst), pageWidth - 18, finalY + 14, { align: "right" });
+
+      // Separator line
+      doc.setLineWidth(0.5);
+      doc.line(totalsX - 5, finalY + 19, pageWidth - 14, finalY + 19);
+
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(11);
-      doc.text(`Grand Total: ₹${quotation.totalAmount?.toLocaleString("en-IN", { minimumFractionDigits: 2 })}`, pageWidth - 14, finalY + 22, { align: "right" });
+      doc.setFontSize(10);
+      doc.text("Grand Total:", totalsX, finalY + 28);
+      doc.text(formatCurrency(quotation.totalAmount), pageWidth - 18, finalY + 28, { align: "right" });
     }
 
     // Footer
+    const footerY = 270;
     doc.setFontSize(8);
     doc.setFont("helvetica", "normal");
-    doc.text("E. & O.E. | Subject to West Midnapore Jurisdiction", 14, 280);
+    doc.text("E. & O.E. | Subject to West Midnapore Jurisdiction", 14, footerY);
+
+    // Computer generated notice with date/time
+    doc.setFontSize(7);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`This is a computer generated quotation. Downloaded on: ${downloadDateTime}`, 14, footerY + 8);
+
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(9);
     doc.setFont("helvetica", "bold");
-    doc.text("For Dibyendu Tewary", pageWidth - 14, 270, { align: "right" });
+    doc.text("For Dibyendu Tewary", pageWidth - 14, footerY - 10, { align: "right" });
     doc.setFont("helvetica", "normal");
-    doc.text("Authorized Signatory", pageWidth - 14, 276, { align: "right" });
+    doc.setFontSize(8);
+    doc.text("Authorized Signatory", pageWidth - 14, footerY - 4, { align: "right" });
 
     // Save
     doc.save(`Quotation_${quotation.quotationNumber?.replace(/\//g, "-")}.pdf`);
@@ -460,19 +504,17 @@ const QuotationPage = () => {
             <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
               <div className="flex items-start gap-3">
                 <svg className="w-5 h-5 text-blue-600 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                 </svg>
                 <div className="flex-1">
                   <p className="text-sm text-blue-800 font-medium">Logged in as:</p>
                   <div className="mt-1 flex items-center gap-2">
-                    <input
-                      type="email"
-                      value={userEmail}
-                      onChange={(e) => setUserEmail(e.target.value)}
-                      className="flex-1 px-3 py-1.5 text-sm border border-blue-300 rounded-lg focus:border-brand-green outline-none bg-white"
-                      placeholder="your@email.com"
-                    />
-                    <span className="text-xs text-blue-600">(editable)</span>
+                    <div className="flex-1 px-3 py-1.5 text-sm bg-white border border-blue-200 rounded-lg text-stone-700">
+                      {currentUser?.email || "Not logged in"}
+                    </div>
+                    <svg className="w-4 h-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                   </div>
                 </div>
               </div>
