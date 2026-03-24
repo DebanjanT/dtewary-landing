@@ -12,7 +12,8 @@
   "dependencies": {
     "blurhash": "^2.0.5",
     "firebase": "^11.6.0",
-    "jspdf": "^3.0.1",
+    "jspdf": "^3.0.4",
+    "jspdf-autotable": "^5.0.7",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-blurhash": "^0.3.0",
