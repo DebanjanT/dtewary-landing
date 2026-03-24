@@ -53,7 +53,7 @@ const Navigation = ({ page }) => {
                 <div className="hidden sm:block">
                   <div className="flex flex-col">
                     <span className="text-xs tracking-[0.3em] text-stone-500 uppercase font-medium">
-                      Est. Since Generations
+                      Trusted By Generations
                     </span>
                     <h1 className="text-xl md:text-2xl font-bold text-stone-800 tracking-tight">
                       Dibyendu Tewary
