@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Contact from "./pages/contact";
 import About from "./pages/about";
 import QuotationPage from "./pages/quotation";
+import NewsRoom from "./pages/newsroom";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UILayout from "./pages/ui/layout";
@@ -53,6 +54,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/newsroom" element={<NewsRoom />} />
         <Route
           path="/quotation"
           element={

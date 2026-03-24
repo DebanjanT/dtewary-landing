@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@sanity/client": "^7.20.0",
+    "@sanity/image-url": "^2.0.3",
     "blurhash": "^2.0.5",
     "firebase": "^11.6.0",
     "jspdf": "^3.0.4",
