@@ -1,13 +1,10 @@
 import Footer from "./Footer";
 import Navigation from "./Navigation";
 
-const Layout = ({ children, page, headerGradient = false }) => {
+const Layout = ({ children, page }) => {
   return (
-    <div id="Layout" className=" w-full max-w-[1366px] mx-auto bg-white">
-      <div className="w-full border-b">
-        <Navigation page={page} />
-      </div>
-      {headerGradient && <div className="header-gradient w-full h-1" />}
+    <div id="Layout" className="w-full max-w-[1366px] mx-auto bg-white">
+      <Navigation page={page} />
       {children}
       <Footer />
     </div>
