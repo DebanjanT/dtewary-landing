@@ -8,6 +8,7 @@ import chatBoxIcon from "../../assets/chat-box.png";
 import LoupeIcon from "../../assets/loupe.png";
 import { useAuth } from "../../context/AuthContext";
 import LoginModal from "../../components/LoginModal";
+import DTLogo from "../../assets/DTLOGO.png";
 
 const Navigation = ({ page }) => {
   const { currentUser, logout } = useAuth();
@@ -94,7 +95,7 @@ const Navigation = ({ page }) => {
         {/* Logo */}
         <div className="flex items-center justify-start gap-1">
           <img
-            src="https://dtewary-dev-storage.innoida.utho.io/logo/dtewary-logo.png"
+            src={DTLogo}
             alt="Logo"
             className="w-14 h-auto"
           />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import Footer from "../../components/shared/Footer";
+import DTLogo from "../../assets/DTLOGO.png";
 
 /**
  * Layout component for UI documentation pages
@@ -37,7 +38,7 @@ const UILayout = () => {
         <div className="flex justify-between items-center">
           <Link to="/" className="text-xl os-semibold text-brand-blackLight">
             <img
-              src="https://dtewary-dev-storage.innoida.utho.io/logo/dtewary-logo.png"
+              src={DTLogo}
               alt="Logo"
               className="w-10 h-auto drop-shadow-lg"
             />
@@ -62,8 +63,7 @@ const UILayout = () => {
             bg-white shadow-mild w-64 flex-shrink-0 overflow-y-auto
             transition-transform duration-300 ease-in-out
             md:translate-x-0 md:static
-            ${
-              isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
             } fixed top-0 left-0 h-full z-40 mt-16 md:mt-0
           `}
         >
@@ -100,10 +100,9 @@ const UILayout = () => {
                     to={component.path}
                     className={`
                       block px-4 py-2 rounded-md os-medium
-                      ${
-                        location.pathname === component.path
-                          ? "bg-brand-green text-white"
-                          : "text-brand-blackLight hover:bg-gray-100"
+                      ${location.pathname === component.path
+                        ? "bg-brand-green text-white"
+                        : "text-brand-blackLight hover:bg-gray-100"
                       }
                     `}
                     onClick={() => setIsSidebarOpen(false)}

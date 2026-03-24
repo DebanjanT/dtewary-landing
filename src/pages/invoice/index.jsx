@@ -6,6 +6,7 @@ import InvoicePreview from "./InvoicePreview";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { Link } from "react-router-dom";
+import DTLogo from "../../assets/DTLOGO.png";
 
 const InvoicePage = () => {
   const [invoiceData, setInvoiceData] = useState({
@@ -140,7 +141,7 @@ const InvoicePage = () => {
           <div className="flex justify-between items-center">
             <Link to="/" className="text-xl os-semibold text-brand-blackLight">
               <img
-                src="https://dtewary-dev-storage.innoida.utho.io/logo/dtewary-logo.png"
+                src={DTLogo}
                 alt="Logo"
                 className="w-10 h-auto drop-shadow-lg"
               />
