@@ -12,8 +12,9 @@ import Shakambari from "../../assets/Shakambhari-Group.png";
 const partners = [
   { name: "Rashmi Group", logo: RashmiGroupLogo },
   { name: "Rashmi Cement", logo: RashmiCementLogo },
-  { name: "Rungta", logo: RungtaLogo },
+  { name: "SR Rungta Group", logo: RungtaLogo },
   { name: "Shakambhari Group", logo: Shakambari },
+
 ];
 
 const Home = () => {
@@ -28,7 +29,7 @@ const Home = () => {
       </div> */}
 
       {/* Our Proficiency Section */}
-      <div className="relative bg-white">
+      <div className="relative proficiency-grad">
         <div className="space-y-10 py-20 px-6 lg:px-8 mx-auto lg:max-w-7xl">
           <h1 className="font-bold text-4xl md:text-5xl text-brand-black w-fit">
             Our Proficiency

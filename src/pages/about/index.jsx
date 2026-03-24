@@ -80,7 +80,7 @@ const About = () => {
       </section>
 
       {/* Founder's Journey Section */}
-      <section className="relative py-16 bg-white">
+      <section className="relative py-16 dotted-grad">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             {/* Left - Story Content */}
@@ -165,8 +165,48 @@ const About = () => {
             </p>
           </div>
 
-          {/* Products Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {/* Featured Product - Eucalyptus Sawn Sized Wood */}
+          <div className="reapeating-strips rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <div className="absolute inset-0" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")' }} />
+            </div>
+
+            {/* Featured Badge */}
+            <div className="absolute top-4 right-4 md:top-6 md:right-6">
+              <span className="px-3 py-1 bg-white/20 backdrop-blur-sm text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                ⭐ Featured Product
+              </span>
+            </div>
+
+            <div className="relative flex flex-col md:flex-row items-center gap-8">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-3xl bg-white/20 flex items-center justify-center flex-shrink-0">
+                <svg className="w-10 h-10 md:w-12 md:h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </div>
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3">
+                  Eucalyptus Sawn Sized Wood
+                </h3>
+                <p className="text-white/90 text-base md:text-lg leading-relaxed mb-4">
+                  Our <strong>flagship product</strong> - precision-cut Eucalyptus timber processed in our saw mills
+                  to exact specifications. Ready for immediate use in construction, furniture making,
+                  and industrial applications.
+                </p>
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                  <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-full">Construction Grade</span>
+                  <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-full">Furniture Quality</span>
+                  <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-full">Industrial Use</span>
+                  <span className="px-3 py-1 bg-white/20 text-white text-sm rounded-full">Custom Sizes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Other Products Grid */}
+          <h3 className="text-xl font-bold text-stone-700 mb-6 text-center">Other Wood Products</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {products.map((product, index) => (
               <div
                 key={product.name}
@@ -201,27 +241,6 @@ const About = () => {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Sawn Sized Wood Section */}
-          <div className="bg-gradient-to-r from-brand-green to-emerald-700 rounded-3xl p-8 md:p-10 text-white">
-            <div className="flex flex-col md:flex-row items-center gap-6">
-              <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
-              </div>
-              <div className="flex-1 text-center md:text-left">
-                <h3 className="text-xl md:text-2xl font-bold mb-2">
-                  Eucalyptus Sawn Sized Wood
-                </h3>
-                <p className="text-white/80">
-                  We also deal in <strong>Eucalyptus Sawn Sized Wood</strong> cutting in saw mills.
-                  Our precision-cut timber is processed to exact specifications, ready for immediate use
-                  in construction, furniture making, and industrial applications.
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </section>

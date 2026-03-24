@@ -5,7 +5,7 @@ const TrustedBySection = ({ partners }) => {
     <section className="relative py-16 overflow-hidden">
       {/* M3 Surface with tonal elevation */}
       <div className="absolute inset-0 bg-gradient-to-br from-green-50 via-emerald-50/50 to-teal-50" />
-      
+
       {/* Decorative shapes - M3 style */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-brand-green/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-brand-yellow/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
@@ -35,10 +35,10 @@ const TrustedBySection = ({ partners }) => {
               className="group relative"
             >
               {/* M3 Elevated Card */}
-              <div className="relative bg-white rounded-3xl p-6 md:p-8 transition-all duration-300 ease-out hover:scale-[1.02] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15),0_2px_4px_rgba(0,0,0,0.1)]">
+              <div className="relative bg-white rounded-3xl p-6 md:p-4 transition-all duration-300 ease-out hover:scale-[1.02] shadow-[0_1px_3px_rgba(0,0,0,0.12),0_1px_2px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.15),0_2px_4px_rgba(0,0,0,0.1)]">
                 {/* State layer - M3 hover effect */}
                 <div className="absolute inset-0 rounded-3xl bg-brand-green/0 group-hover:bg-brand-green/5 transition-colors duration-300" />
-                
+
                 {/* Index badge - M3 style */}
                 <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-gradient-to-br from-brand-green to-emerald-600 flex items-center justify-center shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:scale-100 scale-75">
                   <span className="text-white text-xs font-bold">
@@ -63,29 +63,28 @@ const TrustedBySection = ({ partners }) => {
                 </div>
               </div>
 
-              {/* M3 Ripple effect indicator */}
+              {/* M3 Ripple effect indicator
               <div className="absolute inset-0 rounded-3xl pointer-events-none">
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-gray-200 group-hover:bg-brand-green/30 transition-colors duration-300" />
-              </div>
+              </div> */}
             </div>
           ))}
         </div>
 
         {/* Bottom decorative element - M3 style */}
-        <div className="flex justify-center mt-12">
+        {/* <div className="flex justify-center mt-12">
           <div className="flex items-center gap-3">
             {[...Array(4)].map((_, i) => (
               <div
                 key={i}
-                className={`rounded-full transition-all duration-500 ${
-                  i === 1
+                className={`rounded-full transition-all duration-500 ${i === 1
                     ? "w-8 h-2 bg-brand-green"
                     : "w-2 h-2 bg-gray-300"
-                }`}
+                  }`}
               />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
